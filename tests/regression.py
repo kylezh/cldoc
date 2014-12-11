@@ -5,7 +5,7 @@ import sys, os
 lcldoc = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, lcldoc)
 
-import unittest
+import unittest2
 from cldoc import cmdgenerate
 
 from cldoc import fs
@@ -15,7 +15,7 @@ from xml import etree
 
 fs.fs = fs.Virtual
 
-class Regression(unittest.TestCase):
+class Regression(unittest2.TestCase):
     def setUp(self):
         pass
 
@@ -70,6 +70,6 @@ def generate_tests():
 generate_tests()
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest2.main()
 
 # vi:ts=4:et

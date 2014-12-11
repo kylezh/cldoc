@@ -33,8 +33,12 @@ class Xml(Generator):
         except OSError:
             pass
 
-        ElementTree.register_namespace('gobject', 'http://jessevdk.github.com/cldoc/gobject/1.0')
-        ElementTree.register_namespace('cldoc', 'http://jessevdk.github.com/cldoc/1.0')
+        if ElementTree.VERSION[0:3] == '1.2':
+            ElementTree._namespace_map['http://jessevdk.github.com/cldoc/gobject/1.0'] = 'gobject'
+            ElementTree._namespace_map['http://jessevdk.github.com/cldoc/1.0'] = 'cldoc'
+        else:
+            ElementTree.register_namespace('gobject', 'http://jessevdk.github.com/cldoc/gobject/1.0')
+            ElementTree.register_namespace('cldoc', 'http://jessevdk.github.com/cldoc/1.0')
 
         self.index = ElementTree.Element('index')
         self.written = {}
@@ -110,7 +114,10 @@ class Xml(Generator):
         self.indent(tree.getroot())
 
         f = fs.fs.open(os.path.join(self.outdir, fname), 'w')
-        tree.write(f, encoding='utf-8', xml_declaration=True)
+        if ElementTree.VERSION[0:3] == '1.2':
+            tree.write(f, encoding='UTF-8')
+        else:
+            tree.write(f, encoding='UTF-8', xml_declaration=True)
         f.write('\n')
 
         f.close()

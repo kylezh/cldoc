@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <struct id="N::A" interface="true" name="A" xmlns="http://jessevdk.github.com/cldoc/1.0">
   <method abstract="yes" id="N::A::operator&lt;" name="operator&lt;">
     <return>
